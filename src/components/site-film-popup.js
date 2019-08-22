@@ -85,58 +85,21 @@ export const makePopupTemplate = (
         <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${commentsData.length}</span></h3>
 
         <ul class="film-details__comments-list">
-          <li class="film-details__comment">
+          ${Array.from(commentsData).map((comment) => `
+            <li class="film-details__comment">
             <span class="film-details__comment-emoji">
-              <img src="./images/emoji/smile.png" width="55" height="55" alt="emoji">
+              <img src="${comment.emoji}" width="55" height="55" alt="emoji">
             </span>
             <div>
-              <p class="film-details__comment-text">${commentsData[0].text}</p>
+              <p class="film-details__comment-text">${comment.text}</p>
               <p class="film-details__comment-info">
-                <span class="film-details__comment-author">${commentsData[0].author}</span>
-                <span class="film-details__comment-day">${new Date(commentsData[0].date).toDateString()}</span>
+                <span class="film-details__comment-author">${comment.author}</span>
+                <span class="film-details__comment-day">${new Date(comment.date).toDateString()}</span>
                 <button class="film-details__comment-delete">Delete</button>
               </p>
             </div>
           </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/sleeping.png" width="55" height="55" alt="emoji">
-            </span>
-            <div>
-              <p class="film-details__comment-text">${commentsData[1].text}</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">${commentsData[1].author}</span>
-                <span class="film-details__comment-day">${new Date(commentsData[1].date).toDateString()}</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/puke.png" width="55" height="55" alt="emoji">
-            </span>
-            <div>
-              <p class="film-details__comment-text">${commentsData[2].text}</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">${commentsData[2].author}</span>
-                <span class="film-details__comment-day">${new Date(commentsData[2].date).toDateString()}</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
-          <li class="film-details__comment">
-            <span class="film-details__comment-emoji">
-              <img src="./images/emoji/angry.png" width="55" height="55" alt="emoji">
-            </span>
-            <div>
-              <p class="film-details__comment-text">${commentsData[3].text}</p>
-              <p class="film-details__comment-info">
-                <span class="film-details__comment-author">${commentsData[3].author}</span>
-                <span class="film-details__comment-day">${new Date(commentsData[3].date).toDateString()}</span>
-                <button class="film-details__comment-delete">Delete</button>
-              </p>
-            </div>
-          </li>
+          `)}
         </ul>
 
         <div class="film-details__new-comment">

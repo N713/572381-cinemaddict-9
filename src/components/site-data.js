@@ -100,7 +100,7 @@ export const films = new Array(NUMBER_OF_FILMS_TO_RENDER).fill(``).map(getFilmDa
 export const numberOfSeen = getRandomIntegerUnder(NUMBER_OF_TITLES);
 
 export const filtersValues = [
-  {filter: `All`, value: films.length},
+  {filter: `All movies`, value: films.length},
   {filter: `Watchlist`, value: getRandomIntegerUnder(NUMBER_OF_TITLES)},
   {filter: `History`, value: getRandomIntegerUnder(NUMBER_OF_TITLES)},
   {filter: `Favorites`, value: getRandomIntegerUnder(NUMBER_OF_TITLES)},
@@ -136,6 +136,12 @@ const getCommentsData = () => ({
     `Almost two hours? Seriously?`
   ][getRandomIntegerUnder(COMMENTS_NUMBER)],
   date: Date.now() - (1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000),
+  emoji: [
+    `./images/emoji/smile.png`,
+    `./images/emoji/sleeping.png`,
+    `./images/emoji/puke.png`,
+    `./images/emoji/angry.png`,
+  ][getRandomIntegerUnder(COMMENTS_NUMBER)],
 });
 
 export const commentsData = new Array(COMMENTS_NUMBER).fill(``).map(getCommentsData);
