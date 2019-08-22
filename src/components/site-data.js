@@ -18,8 +18,16 @@ const minutesToHours = (minutes) => {
   return `${hours}h ${lastMinutes}m`;
 };
 
-export const getFilmData = () => ({
-  poster: [
+const avoidZero = (number) => {
+  if (number === 0) {
+    number = 1;
+  }
+
+  return number;
+};
+
+const getPoster = () => {
+  return [
     `./images/posters/made-for-each-other.png`,
     `./images/posters/popeye-meets-sinbad.png`,
     `./images/posters/sagebrush-trail.jpg`,
@@ -27,8 +35,11 @@ export const getFilmData = () => ({
     `./images/posters/the-dance-of-life.jpg`,
     `./images/posters/the-great-flamarion.jpg`,
     `./images/posters/the-man-with-the-golden-arm.jpg`
-  ][getRandomIntegerUnder(NUMBER_OF_TITLES)],
-  title: [
+  ][getRandomIntegerUnder(NUMBER_OF_TITLES)];
+};
+
+const getTitle = () => {
+  return [
     `Made For Each Other`,
     `Popeye Meets Sindbad`,
     `Sagebrush Trail`,
@@ -36,30 +47,53 @@ export const getFilmData = () => ({
     `The Dance Of Life`,
     `The Great Flamarion`,
     `The Man With The Golden Arm`
-  ][getRandomIntegerUnder(NUMBER_OF_TITLES)],
-  rating: [8.1, 7.5, 6.8, 7.7, 9.0, 1.2, 5.5][getRandomIntegerUnder(NUMBER_OF_TITLES)],
-  year: [1929, 1956, 1977, 2002, 1993, 1961, 1985][getRandomIntegerUnder(NUMBER_OF_TITLES)],
-  duration: minutesToHours([124, 136, 142, 112, 137, 141, 55][getRandomIntegerUnder(NUMBER_OF_TITLES)]),
-  genre: [`comedy`, `musical`, `action`, `drama`, `thriller`, `horror`, `documental`][getRandomIntegerUnder(NUMBER_OF_TITLES)],
-  description: [
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-    `Cras aliquet varius magna, non porta ligula feugiat eget.`,
-    `Fusce tristique felis at fermentum pharetra.`,
-    `Aliquam id orci ut lectus varius viverra.`,
-    `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
-    `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
-    `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
-    `Sed sed nisi sed augue convallis suscipit in sed felis.`,
-    `Aliquam erat volutpat.`,
-    `Nunc fermentum tortor ac porta dapibus.`,
-    `In rutrum ac purus sit amet tempus.`
-  ][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
-  comment: [
+  ][getRandomIntegerUnder(NUMBER_OF_TITLES)];
+};
+
+const getRating = () => {
+  return [8.1, 7.5, 6.8, 7.7, 9.0, 1.2, 5.5][getRandomIntegerUnder(NUMBER_OF_TITLES)];
+};
+
+const getYear = () => {
+  return [1929, 1956, 1977, 2002, 1993, 1961, 1985][getRandomIntegerUnder(NUMBER_OF_TITLES)];
+};
+
+const getDuration = () => {
+  return minutesToHours([124, 136, 142, 112, 137, 141, 55][getRandomIntegerUnder(NUMBER_OF_TITLES)]);
+};
+
+const getGenre = () => {
+  return [`comedy`, `musical`, `action`, `drama`, `thriller`, `horror`, `documental`][getRandomIntegerUnder(NUMBER_OF_TITLES)];
+};
+
+const getDescription = () => {
+  return `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet varius magna, non porta ligula feugiat eget. 
+  Fusce tristique felis at fermentum pharetra. Aliquam id orci ut lectus varius viverra. 
+  Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante. Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum. 
+  Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui. 
+  Sed sed nisi sed augue convallis suscipit in sed felis. Aliquam erat volutpat. 
+  Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.
+  `.split(`.`, avoidZero(getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)));
+};
+
+const getComment = () => {
+  return [
     `Interesting setting and a good cast`,
     `Booooooooooring`,
     `Very very old. Meh`,
     `Almost two hours? Seriously?`
-  ].slice([getRandomIntegerUnder(COMMENTS_NUMBER)], getRandomIntegerUnder(COMMENTS_NUMBER)),
+  ].slice([getRandomIntegerUnder(COMMENTS_NUMBER)], getRandomIntegerUnder(COMMENTS_NUMBER));
+};
+
+export const getFilmData = () => ({
+  poster: getPoster(),
+  title: getTitle(),
+  rating: getRating(),
+  year: getYear(),
+  duration: getDuration(),
+  genre: getGenre(),
+  description: getDescription(),
+  comment: getComment(),
 });
 
 export const films = new Array(NUMBER_OF_FILMS_TO_RENDER).fill(``).map(getFilmData);
@@ -73,47 +107,19 @@ export const filtersValues = [
 ];
 
 export const getPopupData = () => ({
-  poster: [
-    `./images/posters/made-for-each-other.png`,
-    `./images/posters/popeye-meets-sinbad.png`,
-    `./images/posters/sagebrush-trail.jpg`,
-    `./images/posters/santa-claus-conquers-the-martians.jpg`,
-    `./images/posters/the-dance-of-life.jpg`,
-    `./images/posters/the-great-flamarion.jpg`,
-    `./images/posters/the-man-with-the-golden-arm.jpg`
-  ][getRandomIntegerUnder(NUMBER_OF_TITLES)],
+  poster: getPoster(),
   age: [12, 14, 16, 18][getRandomIntegerUnder(COMMENTS_NUMBER)],
-  title: [
-    `Made For Each Other`,
-    `Popeye Meets Sindbad`,
-    `Sagebrush Trail`,
-    `Santa Claus Conquers The Martians`,
-    `The Dance Of Life`,
-    `The Great Flamarion`,
-    `The Man With The Golden Arm`
-  ][getRandomIntegerUnder(NUMBER_OF_TITLES)],
-  rating: [8.1, 7.5, 6.8, 7.7, 9.0, 1.2, 5.5][getRandomIntegerUnder(NUMBER_OF_TITLES)],
+  title: getTitle(),
+  rating: getRating(),
   director: [`Anthony Mann`, `Anthony Wann`, `Anthony Zann`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
   writer: [`Anne Wigton`, `Heinz Herald`, `Richard Weil`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
   actors: [`Erich von Stroheim`, `Mary Beth Hughes`, `Dan Duryea`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
-  releaseDate: [1929, 1956, 1977, 2002, 1993, 1961, 1985][getRandomIntegerUnder(NUMBER_OF_TITLES)],
-  runtime: minutesToHours([124, 136, 142, 112, 137, 141, 55][getRandomIntegerUnder(NUMBER_OF_TITLES)]),
+  releaseDate: getYear(),
+  runtime: getDuration(),
   country: [`USA`, `Canada`, `France`, `Germany`, `Italy`, `Spain`, `Norway`][getRandomIntegerUnder(NUMBER_OF_TITLES)],
   genres: [`comedy`, `musical`, `action`, `drama`, `thriller`, `horror`, `documental`]
     .slice(getRandomIntegerUnder(0), getRandomIntegerUnder(NUMBER_OF_TITLES)),
-  description: [
-    `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-    `Cras aliquet varius magna, non porta ligula feugiat eget.`,
-    `Fusce tristique felis at fermentum pharetra.`,
-    `Aliquam id orci ut lectus varius viverra.`,
-    `Nullam nunc ex, convallis sed finibus eget, sollicitudin eget ante.`,
-    `Phasellus eros mauris, condimentum sed nibh vitae, sodales efficitur ipsum.`,
-    `Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.`,
-    `Sed sed nisi sed augue convallis suscipit in sed felis.`,
-    `Aliquam erat volutpat.`,
-    `Nunc fermentum tortor ac porta dapibus.`,
-    `In rutrum ac purus sit amet tempus.`
-  ][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
+  description: getDescription(),
 });
 
 const getCommentsData = () => ({

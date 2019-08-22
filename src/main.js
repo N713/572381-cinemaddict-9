@@ -1,3 +1,4 @@
+import {films} from '../src/components/site-data.js';
 import {makeFilmsListContainerTemplate} from '../src/components/site-films-container';
 import {makeFilmsListTitleTemplate} from '../src/components/site-films-list-title';
 import {makeShowMoreButtonTemplate} from '../src/components/site-show-more';
@@ -33,6 +34,10 @@ const renderCards = (numberOfCards, parentElement) => {
     renderTemplate(parentElement, makeFilmCardTemplate(), `beforeend`));
 };
 
+const renderCardsList = (parent) => {
+  parent.insertAdjacentHTML(`beforeend`, films.map(makeFilmCardTemplate).join(``));
+};
+
 const renderExtraFilmsCards = (numberOfCards, extraSection) => {
   renderTemplate(extraSection, makeFilmsListContainerTemplate(), `beforeend`);
   let filmsContainer = extraSection.querySelector(`.films-list__container`);
@@ -57,7 +62,7 @@ upcomingMovies.classList.add(`visually-hidden`);
 renderTemplate(filmsList, makeFilmsListContainerTemplate(), `beforeend`);
 
 const upcomingFilmsContainer = filmsList.querySelector(`.films-list__container`);
-renderCards(NUMBER_OF_FILMS_TO_RENDER, upcomingFilmsContainer);
+renderCardsList(upcomingFilmsContainer);
 renderTemplate(filmsList, makeShowMoreButtonTemplate(), `beforeend`);
 
 const extraFilmsSections = filmsSection.querySelectorAll(`.films-list--extra`);
@@ -68,3 +73,43 @@ extraFilmsSections.forEach((section) => {
 const body = document.querySelector(`body`);
 renderTemplate(body, makePopupTemplate(), `beforeend`);
 document.querySelector(`.film-details`).classList.add(`visually-hidden`);
+
+const showMoreButton = filmsList.querySelector(`.films-list__show-more`);
+let cards = filmsList.querySelectorAll(`.film-card`);
+cards.forEach((card) => {
+  card.classList.add(`visually-hidden`);
+});
+
+let limiter = 0;
+
+const checkForHiddens = () => {
+  let isHidden;
+
+  for (let card of cards) {
+    isHidden = card.classList.contains(`visually-hidden`);
+  }
+
+  return isHidden;
+};
+
+const showCards = () => {
+  for (let i = 0; i < NUMBER_OF_FILMS_TO_RENDER + limiter; i++) {
+    cards[i].classList.remove(`visually-hidden`);
+  }
+
+  if (!checkForHiddens()) {
+    showMoreButton.classList.add(`visually-hidden`);
+  }
+
+  limiter += 5;
+};
+
+const onShowMoreClick = () => {
+  showCards();
+};
+
+const filmsInBase = document.querySelector(`.footer__statistics p`);
+filmsInBase.textContent = `${cards.length.toString()} movies inside`;
+
+showCards();
+showMoreButton.addEventListener(`click`, onShowMoreClick);
