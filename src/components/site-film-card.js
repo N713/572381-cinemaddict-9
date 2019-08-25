@@ -1,4 +1,3 @@
-import {getFilmData} from './site-data';
 import {utils} from './site-utils';
 
 export class FilmCard {
@@ -41,4 +40,4 @@ export class FilmCard {
         </form>
       </article>`;
   }
-};
+}

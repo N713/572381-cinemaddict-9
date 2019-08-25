@@ -10,4 +10,4 @@ export class Search {
         <button class="search__reset" type="reset">Reset</button>
       </form>`;
   }
-};
+}

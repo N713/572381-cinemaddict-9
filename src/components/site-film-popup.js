@@ -1,9 +1,8 @@
-import {getPopupData} from './site-data';
 import {commentsData} from './site-data';
 import {utils} from "./site-utils";
 
 export class FilmPopup {
-  constructor({poster, age, title, rating, director, writer, actors, releaseDate, runtime, country, genres, description}){
+  constructor({poster, age, title, rating, director, writer, actors, releaseDate, runtime, country, genres, description}) {
     this._poster = poster;
     this._age = age;
     this._title = title;
@@ -28,7 +27,7 @@ export class FilmPopup {
 
   getTemplate() {
     return `
-      <section class="film-details visually-hidden">
+      <section class="film-details">
         <form class="film-details__inner" action="" method="get">
           <div class="form-details__top-container">
             <div class="film-details__close">
@@ -160,4 +159,4 @@ export class FilmPopup {
         </form>
       </section>`;
   }
-};
+}
