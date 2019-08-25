@@ -76,8 +76,8 @@ extraFilmsSections.forEach((section) => {
 });
 
 const extraFilmsContainers = filmsSection.querySelectorAll(`.films-list--extra .films-list__container`);
-const extraData = new Array(extraFilmsContainers.length).fill(``).map(getFilmData);
 extraFilmsContainers.forEach((container) => {
+  const extraData = new Array(extraFilmsContainers.length).fill(``).map(getFilmData);
   extraData.forEach((data) => {
     renderCard(data, container);
   });
