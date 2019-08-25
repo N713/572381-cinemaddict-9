@@ -1,5 +1,6 @@
 import {getPopupData} from './site-data';
 import {commentsData} from './site-data';
+import {utils} from "./site-utils";
 
 export class FilmPopup {
   constructor({poster, age, title, rating, director, writer, actors, releaseDate, runtime, country, genres, description}){
@@ -27,7 +28,7 @@ export class FilmPopup {
 
   getTemplate() {
     return `
-      <section class="film-details">
+      <section class="film-details visually-hidden">
         <form class="film-details__inner" action="" method="get">
           <div class="form-details__top-container">
             <div class="film-details__close">
