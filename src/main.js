@@ -16,10 +16,11 @@ import {FilmsListContainer} from "./components/site-films-container";
 import {CommentedFilms} from "./components/site-films-commented";
 import {FilmsListTitle} from "./components/site-films-list-title";
 
+const ESC_KEYCODE = 27;
+const NUMBER_OF_FILMS_TO_RENDER = 5;
+
 const getElementFromClass = (classObject) => {
-  const instance = classObject;
-  const instanceElement = utils.makeElement(instance.getTemplate());
-  return instanceElement;
+  return utils.makeElement(classObject.getTemplate());
 };
 
 const renderElements = (array, container, position) => {
@@ -31,15 +32,39 @@ const renderElements = (array, container, position) => {
 const renderCard = (cardMock, cardContainer) => {
   const card = new FilmCard(cardMock);
 
+  const title = card.getElement().querySelector(`.film-card__title`);
+  const posterImage = card.getElement().querySelector(`.film-card img`);
+  const commentsCount = card.getElement().querySelector(`.film-card__comments`);
+
+  [title, posterImage, commentsCount].forEach((element) => {
+    element.addEventListener(`click`, () => {
+      document.querySelector(`.film-details`).classList
+        .toggle(`visually-hidden`, false);
+    });
+    element.style.cursor = `pointer`;
+  });
+
   utils.render(cardContainer, card.getElement(), utils.Position.BEFOREEND);
 };
 
 const renderPopup = (popupMock) => {
   const popup = new FilmPopup(popupMock);
+
+  popup.getElement().classList.add(`visually-hidden`);
+
+  document.addEventListener(`keydown`, (evt) => {
+    if (evt.keyCode === ESC_KEYCODE) {
+      popup.getElement().classList.toggle(`visually-hidden`, true);
+    }
+  });
+
+  popup.getElement().querySelector(`.film-details__close-btn`)
+    .addEventListener(`click`, () => {
+      popup.getElement().classList.toggle(`visually-hidden`, true);
+    });
+
   utils.render(body, popup.getElement(), utils.Position.BEFOREEND);
-  const popupElement = document.querySelector(`.film-details`);
-  popupElement.classList.add(`visually-hidden`);
-}
+};
 
 const body = document.querySelector(`body`);
 renderPopup(getPopupData());
@@ -83,5 +108,42 @@ extraFilmsContainers.forEach((container) => {
   });
 });
 
+const showMoreButton = filmsList.querySelector(`.films-list__show-more`);
+let cards = filmsList.querySelectorAll(`.film-card`);
+cards.forEach((card) => {
+  card.classList.add(`visually-hidden`);
+});
+
+let limiter = 0;
+
+const checkForHiddens = () => {
+  let isHidden;
+
+  for (let card of cards) {
+    isHidden = card.classList.contains(`visually-hidden`);
+  }
+
+  return isHidden;
+};
+
+const showCards = () => {
+  for (let i = 0; i < NUMBER_OF_FILMS_TO_RENDER + limiter; i++) {
+    cards[i].classList.remove(`visually-hidden`);
+  }
+
+  if (!checkForHiddens()) {
+    showMoreButton.classList.add(`visually-hidden`);
+  }
+
+  limiter += 5;
+};
+
+const onShowMoreClick = () => {
+  showCards();
+};
+
 const filmsInBase = document.querySelector(`.footer__statistics p`);
 filmsInBase.textContent = `${films.length.toString()} movies inside`;
+
+showCards();
+showMoreButton.addEventListener(`click`, onShowMoreClick);
