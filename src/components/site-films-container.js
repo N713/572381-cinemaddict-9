@@ -1,1 +1,5 @@
-export const makeFilmsListContainerTemplate = () => `<div class="films-list__container"></div>`;
+export class FilmsListContainer {
+  getTemplate() {
+    return `<div class="films-list__container"></div>`;
+  }
+};

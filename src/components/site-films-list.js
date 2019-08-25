@@ -1,1 +1,5 @@
-export const makeFilmsListTemplate = () => `<section class="films-list"></section>`;
+export class FilmsList {
+  getTemplate() {
+    return `<section class="films-list"></section>`;
+  }
+};
