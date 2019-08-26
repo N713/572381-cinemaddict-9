@@ -1,4 +1,8 @@
-export const makeTopFilmsTemplate = () => `
-<section class="films-list--extra">
-  <h2 class="films-list__title">Top rated</h2>
-</section>`;
+export class TopFilms {
+  getTemplate() {
+    return `
+      <section class="films-list--extra">
+        <h2 class="films-list__title">Top rated</h2>
+      </section>`;
+  }
+}
