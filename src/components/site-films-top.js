@@ -1,4 +1,6 @@
-export class TopFilms {
+import {AbstractComponent} from "./site-abstract-component";
+
+export class TopFilms extends AbstractComponent {
   getTemplate() {
     return `
       <section class="films-list--extra">

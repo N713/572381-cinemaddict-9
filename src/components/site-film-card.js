@@ -1,7 +1,8 @@
-import {utils} from './site-utils';
+import {AbstractComponent} from "./site-abstract-component";
 
-export class FilmCard {
+export class FilmCard extends AbstractComponent {
   constructor({poster, title, rating, year, duration, genre, description, comment}) {
+    super();
     this._poster = poster;
     this._title = title;
     this._rating = rating;
@@ -10,14 +11,6 @@ export class FilmCard {
     this._genre = genre;
     this._description = description;
     this._comment = comment;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = utils.makeElement(this.getTemplate());
-    }
-
-    return this._element;
   }
 
   getTemplate() {

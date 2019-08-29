@@ -31,6 +31,7 @@ const renderElements = (array, container, position) => {
 
 const renderCard = (cardMock, cardContainer) => {
   const card = new FilmCard(cardMock);
+  console.log(card);
 
   const title = card.getElement().querySelector(`.film-card__title`);
   const posterImage = card.getElement().querySelector(`.film-card img`);

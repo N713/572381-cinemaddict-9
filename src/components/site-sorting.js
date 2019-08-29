@@ -1,4 +1,6 @@
-export class Sorting {
+import {AbstractComponent} from "./site-abstract-component";
+
+export class Sorting extends AbstractComponent {
   getTemplate() {
     return `
       <ul class="sort">
