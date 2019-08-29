@@ -55,9 +55,8 @@ extraFilmsSections.forEach((section) => {
 const extraFilmsContainers = filmsSection.querySelectorAll(`.films-list--extra .films-list__container`);
 extraFilmsContainers.forEach((container) => {
   const extraData = new Array(extraFilmsContainers.length).fill(``).map(getFilmData);
-  extraData.forEach((data) => {
-    utils.renderCard(data, container);
-  });
+  const extraController = new PageController(container, extraData);
+  extraController.init();
 });
 
 const showMoreButton = filmsList.querySelector(`.films-list__show-more`);
