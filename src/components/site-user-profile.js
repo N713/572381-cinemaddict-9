@@ -1,6 +1,7 @@
+import {AbstractComponent} from "./site-abstract-component";
 import {numberOfSeen} from './site-data';
 
-export class UserProfile {
+export class UserProfile extends AbstractComponent {
   getTemplate() {
     return `
       <section class="header__profile profile">

@@ -1,6 +1,7 @@
+import {AbstractComponent} from "./site-abstract-component";
 import {filtersValues} from './site-data';
 
-export class Navigation {
+export class Navigation extends AbstractComponent {
   getTemplate() {
     return `
       <nav class="main-navigation">

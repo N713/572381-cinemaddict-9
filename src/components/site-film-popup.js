@@ -1,8 +1,9 @@
+import {AbstractComponent} from "./site-abstract-component";
 import {commentsData} from './site-data';
-import {utils} from "./site-utils";
 
-export class FilmPopup {
+export class FilmPopup extends AbstractComponent {
   constructor({poster, age, title, rating, director, writer, actors, releaseDate, runtime, country, genres, description}) {
+    super();
     this._poster = poster;
     this._age = age;
     this._title = title;
@@ -15,14 +16,6 @@ export class FilmPopup {
     this._country = country;
     this._genres = genres;
     this._description = description;
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = utils.makeElement(this.getTemplate());
-    }
-
-    return this._element;
   }
 
   getTemplate() {
