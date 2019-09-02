@@ -9,4 +9,8 @@ export class Sorting extends AbstractComponent {
         <li><a href="#" class="sort__button">Sort by rating</a></li>
       </ul>`;
   }
+
+  getElement() {
+    return super.getElement();
+  }
 }
