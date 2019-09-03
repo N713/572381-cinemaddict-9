@@ -75,4 +75,9 @@ export const utils = {
     utils.render(body, popup.getElement(), utils.Position.BEFOREEND);
   },
 
+  renderData: (data, container) => {
+    data.forEach((element) => {
+      utils.renderCard(element, container);
+    });
+  },
 };

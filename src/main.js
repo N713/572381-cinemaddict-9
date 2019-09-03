@@ -30,13 +30,6 @@ const headerElement = document.querySelector(`.header`);
 utils.renderElements(elementsIntoHeader, headerElement, utils.Position.BEFOREEND);
 utils.renderElements(elementsIntoMain, mainElement, utils.Position.BEFOREEND);
 
-const filters = mainElement.querySelectorAll(`.sort__button`);
-const dataAtributes = [`default`, `by-date`, `by-rating`];
-
-for (let i = 0; i < filters.length; i++) {
-  filters[i].setAttribute(`data-sorting`, dataAtributes[i]);
-};
-
 const filmsSection = mainElement.querySelector(`.films`);
 utils.renderElements(elementsIntoFilmsSextion, filmsSection, utils.Position.BEFOREEND);
 

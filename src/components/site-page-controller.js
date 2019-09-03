@@ -1,12 +1,12 @@
 import {films} from "./site-data";
 import {utils} from "./site-utils";
-import {Sorting} from "./site-sorting";
+
+const mainElement = document.querySelector(`.main`);
 
 export class PageController {
   constructor(container, cards) {
     this._container = container;
     this._cards = cards;
-    this._sort = new Sorting();
   }
 
   init() {
@@ -14,8 +14,14 @@ export class PageController {
       utils.renderCard(card, this._container);
     });
 
-    this._sort.getElement().querySelectorAll(`.sort__button`)
-      .forEach(() => addEventListener(`click`, (evt) => this._onSortingClick(evt)));
+    const filters = mainElement.querySelectorAll(`.sort__button`);
+    const dataAtributes = [`default`, `by-date`, `by-rating`];
+
+    for (let i = 0; i < filters.length; i++) {
+      filters[i].setAttribute(`data-sorting`, dataAtributes[i]);
+    }
+
+    mainElement.querySelector(`.sort`).addEventListener(`click`, (evt) => this._onSortingClick(evt));
   }
 
   _onSortingClick(evt) {
@@ -27,24 +33,24 @@ export class PageController {
 
     this._container.innerHTML = ``;
 
+    if (!evt.target.classList.contains(`sort__button--active`)) {
+      let currentFilter = mainElement.querySelector(`.sort__button--active`);
+      currentFilter.classList.remove(`sort__button--active`);
+      evt.target.classList.add(`sort__button--active`);
+    }
+
     switch (evt.target.dataset.sorting) {
       case `default`:
         const defaultData = films.slice();
-        defaultData.forEach((film) => {
-          utils.renderCard(film, this._container);
-        });
+        utils.renderData(defaultData, this._container);
         break;
       case `by-date`:
         const sortedByDate = films.slice().sort((a, b) => b.year - a.year);
-        sortedByDate.forEach((film) => {
-          utils.renderCard(film, this._container);
-        });
+        utils.renderData(sortedByDate, this._container);
         break;
       case `by-rating`:
         const sortedByRating = films.slice().sort((a, b) => b.rating - a.rating);
-        sortedByRating.forEach((film) => {
-          utils.renderCard(film, this._container);
-        });
+        utils.renderData(sortedByRating, this._container);
         break;
     }
   }
