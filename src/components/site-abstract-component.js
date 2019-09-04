@@ -1,5 +1,3 @@
-import {utils} from './site-utils';
-
 export class AbstractComponent {
   constructor() {
     this._element = null;
@@ -9,9 +7,15 @@ export class AbstractComponent {
     }
   }
 
+  static makeElement(template) {
+    const newElement = document.createElement(`div`);
+    newElement.innerHTML = template;
+    return newElement.firstElementChild;
+  }
+
   getElement() {
     if (!this._element) {
-      this._element = utils.makeElement(this.getTemplate());
+      this._element = AbstractComponent.makeElement(this.getTemplate());
     }
 
     return this._element;

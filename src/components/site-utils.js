@@ -1,3 +1,4 @@
+import {AbstractComponent} from "./site-abstract-component";
 import {FilmPopup} from "./site-film-popup";
 import {FilmCard} from "./site-film-card";
 
@@ -8,12 +9,6 @@ export const utils = {
   Position: {
     AFTERBEGIN: `afterbegin`,
     BEFOREEND: `beforeend`,
-  },
-
-  makeElement: (template) => {
-    const newElement = document.createElement(`div`);
-    newElement.innerHTML = template;
-    return newElement.firstElementChild;
   },
 
   render: (container, element, place) => {
@@ -34,7 +29,7 @@ export const utils = {
   },
 
   getElementFromClass: (classObject) => {
-    return utils.makeElement(classObject.getTemplate());
+    return AbstractComponent.makeElement(classObject.getTemplate());
   },
 
   renderElements: (array, container, position) => {
@@ -80,4 +75,9 @@ export const utils = {
     utils.render(body, popup.getElement(), utils.Position.BEFOREEND);
   },
 
+  renderData: (data, container) => {
+    data.forEach((element) => {
+      utils.renderCard(element, container);
+    });
+  },
 };
