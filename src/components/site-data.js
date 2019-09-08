@@ -94,6 +94,11 @@ export const getFilmData = () => ({
   genre: getGenre(),
   description: getDescription(),
   comment: getComment(),
+  state: {
+    isToWatchlist: false,
+    isWatched: false,
+    isFavorite: false,
+  }
 });
 
 export const films = new Array(NUMBER_OF_FILMS_TO_RENDER).fill(``).map(getFilmData);

@@ -14,6 +14,12 @@ export class PageController {
       utils.renderCard(card, this._container);
     });
 
+    const cards = mainElement.querySelectorAll(`.film-card`);
+
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].setAttribute(`data-id`, i);
+    }
+
     const filters = mainElement.querySelectorAll(`.sort__button`);
     const dataAtributes = [`default`, `by-date`, `by-rating`];
 
@@ -22,6 +28,12 @@ export class PageController {
     }
 
     mainElement.querySelector(`.sort`).addEventListener(`click`, (evt) => this._onSortingClick(evt));
+  }
+
+  _onDataChange(newData, oldData) {
+    this._cards[this._cards.findIndex((index) => index === oldData)] = newData;
+    this._container.innerHTML = ``;
+    utils.renderData(this._cards, this._container);
   }
 
   _onSortingClick(evt) {

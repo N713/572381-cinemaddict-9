@@ -16,10 +16,11 @@ import {FilmsListContainer} from "./components/site-films-container";
 import {CommentedFilms} from "./components/site-films-commented";
 import {FilmsListTitle} from "./components/site-films-list-title";
 import {PageController} from "./components/site-page-controller";
+import {MovieController} from "./components/site-movie-controller";
 
 const NUMBER_OF_FILMS_TO_RENDER = 5;
 
-utils.renderPopup(getPopupData());
+//utils.renderPopup(getPopupData());
 
 const elementsIntoHeader = [utils.getElementFromClass(new Search), utils.getElementFromClass(new UserProfile)];
 const elementsIntoMain = [utils.getElementFromClass(new Navigation), utils.getElementFromClass(new Sorting), utils.getElementFromClass(new FilmSection)];
@@ -44,6 +45,9 @@ utils.render(filmsList, utils.getElementFromClass(new FilmsListContainer), utils
 const upcomingFilmsContainer = filmsList.querySelector(`.films-list__container`);
 const controller = new PageController(upcomingFilmsContainer, films);
 controller.init();
+
+const movieController = new MovieController(films, controller._onDataChange());
+movieController.init();
 
 utils.render(upcomingFilmsContainer, utils.getElementFromClass(new ShowMoreButton()), utils.Position.BEFOREEND);
 
