@@ -4,6 +4,7 @@ import {FilmCard} from "./site-film-card";
 
 const ESC_KEYCODE = 27;
 const body = document.querySelector(`body`);
+const mainElement = document.querySelector(`.main`);
 
 export const utils = {
   Position: {
@@ -54,6 +55,12 @@ export const utils = {
     });
 
     utils.render(cardContainer, card.getElement(), utils.Position.BEFOREEND);
+
+    const cards = mainElement.querySelectorAll(`.film-card`);
+
+    for (let i = 0; i < cards.length; i++) {
+      cards[i].setAttribute(`data-id`, i);
+    }
   },
 
   renderPopup: (popupMock) => {

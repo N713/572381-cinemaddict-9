@@ -46,7 +46,7 @@ const upcomingFilmsContainer = filmsList.querySelector(`.films-list__container`)
 const controller = new PageController(upcomingFilmsContainer, films);
 controller.init();
 
-const movieController = new MovieController(films, controller._onDataChange());
+const movieController = new MovieController(films, controller._onDataChange.bind(controller));
 movieController.init();
 
 utils.render(upcomingFilmsContainer, utils.getElementFromClass(new ShowMoreButton()), utils.Position.BEFOREEND);
