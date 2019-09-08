@@ -21,6 +21,10 @@ export class MovieController {
         if (evt.target.tagName === `BUTTON`) {
           const currentId = card.dataset.id;
 
+          if (!evt.target.classList.contains(`film-card__controls-item--active`)) {
+            evt.target.classList.add(`film-card__controls-item--active`);
+          }
+
           if (evt.target.classList.contains(`film-card__controls-item--add-to-watchlist`)) {
             dataCopy[currentId].state.isToWatchlist = true;
           }
