@@ -1,6 +1,7 @@
 import {utils} from "./site-utils";
 import {films, getPopupData} from "./site-data";
 
+const body = document.querySelector(`body`);
 const mainElement = document.querySelector(`.main`);
 
 export class MovieController {
@@ -40,6 +41,27 @@ export class MovieController {
           this._onDataChange(dataCopy, this._data);
         }
       });
+    });
+
+    body.querySelector(`.film-details__controls`).addEventListener(`click`, (evt) => {
+
+      if (evt.target.tagName === `LABEL` && evt.target.classList.contains(`film-details__control-label`)) {
+        const formData = new FormData(body.querySelector(`.film-details__inner`));
+
+        if (formData.get(`watchlist`) !== `on` && evt.target.classList.contains(`film-details__control-label--watchlist`)) {
+          dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isToWatchlist = true;
+        }
+
+        if (formData.get(`watched`) !== `on` && evt.target.classList.contains(`film-details__control-label--watched`)) {
+          dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isWatched = true;
+        }
+
+        if (formData.get(`favoritw`) !== `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
+          dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isFavorite = true;
+        }
+
+        this._onDataChange(dataCopy, this._data);
+      }
     });
   }
 }
