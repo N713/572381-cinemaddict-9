@@ -1,5 +1,5 @@
 import {utils} from "./site-utils";
-import {films, getPopupData} from "./site-data";
+import {getPopupData} from "./site-data";
 
 const body = document.querySelector(`body`);
 const mainElement = document.querySelector(`.main`);
@@ -13,7 +13,13 @@ export class MovieController {
   init() {
     utils.renderPopup(getPopupData());
 
-    const dataCopy = films.slice();
+    this._onCardControlClick();
+    this._onPopupControlClick();
+    this._onCommentEmojiClick();
+  }
+
+  _onCardControlClick() {
+    const dataCopy = this._data.slice();
 
     mainElement.querySelectorAll(`.film-card`).forEach((card) => {
       card.addEventListener(`click`, (evt) => {
@@ -50,6 +56,10 @@ export class MovieController {
         }
       });
     });
+  }
+
+  _onPopupControlClick() {
+    const dataCopy = this._data.slice();
 
     body.querySelector(`.film-details__controls`).addEventListener(`click`, (evt) => {
 
@@ -74,8 +84,6 @@ export class MovieController {
         this._onDataChange(dataCopy, this._data);
       }
     });
-
-    this._onCommentEmojiClick();
   }
 
   _onCommentEmojiClick() {
