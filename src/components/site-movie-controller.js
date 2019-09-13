@@ -67,7 +67,7 @@ export class MovieController {
           body.querySelector(`.form-details__middle-container`).classList.add(`visually-hidden`);
         }
 
-        if (formData.get(`favoritw`) !== `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
+        if (formData.get(`favorite`) !== `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
           dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isFavorite = true;
         }
 
