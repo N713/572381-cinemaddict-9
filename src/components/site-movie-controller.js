@@ -62,9 +62,9 @@ export class MovieController {
 
         if (formData.get(`watched`) !== `on` && evt.target.classList.contains(`film-details__control-label--watched`)) {
           dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isWatched = true;
-          body.querySelector(`.form-details__middle-container`).classList.remove('visually-hidden');
+          body.querySelector(`.form-details__middle-container`).classList.remove(`visually-hidden`);
         } else {
-          body.querySelector(`.form-details__middle-container`).classList.add('visually-hidden');
+          body.querySelector(`.form-details__middle-container`).classList.add(`visually-hidden`);
         }
 
         if (formData.get(`favoritw`) !== `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
@@ -73,6 +73,37 @@ export class MovieController {
 
         this._onDataChange(dataCopy, this._data);
       }
+    });
+
+    this._onCommentEmojiClick();
+  }
+
+  _onCommentEmojiClick() {
+    const emojiContainer = body.querySelector(`.film-details__add-emoji-label`);
+    const emojiHeight = body.querySelector(`.film-details__comment-emoji img`).getAttribute(`height`);
+    const emojiWidth = body.querySelector(`.film-details__comment-emoji img`).getAttribute(`width`);
+
+    body.querySelectorAll(`.film-details__emoji-label`).forEach((label) => {
+      label.addEventListener(`click`, () => {
+        switch (label.getAttribute(`for`)) {
+          case `emoji-sleeping`:
+            emojiContainer.innerHTML = ``;
+            emojiContainer.innerHTML = `<img src="./images/emoji/sleeping.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
+            break;
+          case `emoji-smile`:
+            emojiContainer.innerHTML = ``;
+            emojiContainer.innerHTML = `<img src="./images/emoji/smile.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
+            break;
+          case `emoji-gpuke`:
+            emojiContainer.innerHTML = ``;
+            emojiContainer.innerHTML = `<img src="./images/emoji/puke.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
+            break;
+          case `emoji-angry`:
+            emojiContainer.innerHTML = ``;
+            emojiContainer.innerHTML = `<img src="./images/emoji/angry.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
+            break;
+        }
+      });
     });
   }
 }
