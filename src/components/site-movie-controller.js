@@ -62,6 +62,9 @@ export class MovieController {
 
         if (formData.get(`watched`) !== `on` && evt.target.classList.contains(`film-details__control-label--watched`)) {
           dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isWatched = true;
+          body.querySelector(`.form-details__middle-container`).classList.remove('visually-hidden');
+        } else {
+          body.querySelector(`.form-details__middle-container`).classList.add('visually-hidden');
         }
 
         if (formData.get(`favoritw`) !== `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
