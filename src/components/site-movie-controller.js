@@ -24,18 +24,26 @@ export class MovieController {
 
           if (!evt.target.classList.contains(`film-card__controls-item--active`)) {
             evt.target.classList.add(`film-card__controls-item--active`);
+          } else if (evt.target.classList.contains(`film-card__controls-item--active`)) {
+            evt.target.classList.remove(`film-card__controls-item--active`);
           }
 
-          if (evt.target.classList.contains(`film-card__controls-item--add-to-watchlist`)) {
+          if (evt.target.classList.contains(`film-card__controls-item--add-to-watchlist`) && dataCopy[currentId].state.isToWatchlist === false) {
             dataCopy[currentId].state.isToWatchlist = true;
+          } else if (dataCopy[currentId].state.isToWatchlist === true && evt.target.classList.contains(`film-card__controls-item--active`)) {
+            dataCopy[currentId].state.isToWatchlist = false;
           }
 
-          if (evt.target.classList.contains(`film-card__controls-item--mark-as-watched`)) {
+          if (evt.target.classList.contains(`film-card__controls-item--mark-as-watched`) && dataCopy[currentId].state.isWatched === false) {
             dataCopy[currentId].state.isWatched = true;
+          } else if (dataCopy[currentId].state.isWatched === true && evt.target.classList.contains(`film-card__controls-item--active`)) {
+            dataCopy[currentId].state.isWatched = false;
           }
 
-          if (evt.target.classList.contains(`film-card__controls-item--favorite`)) {
+          if (evt.target.classList.contains(`film-card__controls-item--favorite`) && dataCopy[currentId].state.isFavorite === false) {
             dataCopy[currentId].state.isFavorite = true;
+          } else if (dataCopy[currentId].state.isFavorite === true && evt.target.classList.contains(`film-card__controls-item--active`)) {
+            dataCopy[currentId].state.isFavorite = false;
           }
 
           this._onDataChange(dataCopy, this._data);
