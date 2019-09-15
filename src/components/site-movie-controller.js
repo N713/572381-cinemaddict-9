@@ -16,6 +16,7 @@ export class MovieController {
     this._onCardControlClick();
     this._onPopupControlClick();
     this._onCommentEmojiClick();
+    this._onRatingControlClick();
   }
 
   _onCardControlClick() {
@@ -111,6 +112,17 @@ export class MovieController {
             emojiContainer.innerHTML = `<img src="./images/emoji/angry.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
             break;
         }
+      });
+    });
+  }
+
+  _onRatingControlClick() {
+    const totalRating = parseInt(body.querySelector(`.film-details__total-rating`).textContent, 10);
+
+    body.querySelectorAll(`.film-details__user-rating-label`).forEach((control) => {
+      control.addEventListener(`click`, (evt) => {
+        const middleRating = (totalRating + parseInt(`${evt.target.textContent}`, 10)) / 2;
+        body.querySelector(`.film-details__total-rating`).textContent = middleRating;
       });
     });
   }
