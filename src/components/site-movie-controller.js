@@ -79,17 +79,22 @@ export class MovieController {
 
         if (formData.get(`watchlist`) !== `on` && evt.target.classList.contains(`film-details__control-label--watchlist`)) {
           dataCopy[currentCard].state.isToWatchlist = true;
+        } else if (formData.get(`watchlist`) === `on` && evt.target.classList.contains(`film-details__control-label--watchlist`)) {
+          dataCopy[currentCard].state.isToWatchlist = false;
         }
 
         if (formData.get(`watched`) !== `on` && evt.target.classList.contains(`film-details__control-label--watched`)) {
           dataCopy[currentCard].state.isWatched = true;
           body.querySelector(`.form-details__middle-container`).classList.remove(`visually-hidden`);
-        } else {
+        } else if (formData.get(`watched`) === `on` && evt.target.classList.contains(`film-details__control-label--watched`)) {
           body.querySelector(`.form-details__middle-container`).classList.add(`visually-hidden`);
+          ataCopy[currentCard].state.isWatched = false;
         }
 
         if (formData.get(`favorite`) !== `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
           dataCopy[currentCard].state.isFavorite = true;
+        } else if (formData.get(`favorite`) === `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
+          dataCopy[currentCard].state.isFavorite = false;
         }
 
         this._onDataChange(dataCopy, this._data);
