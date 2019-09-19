@@ -11,11 +11,8 @@ export class MovieController {
 
   init() {
     utils.renderPopup(this._data[0]);
-    this._onCardClick();
     this._onCardControlClick();
-    this._onPopupControlClick();
-    this._onCommentEmojiClick();
-    this._onRatingControlClick();
+    this._onCardClick();
   }
 
   _onCardClick() {
@@ -26,6 +23,9 @@ export class MovieController {
           utils.remove(body.querySelector(`.film-details`));
           utils.renderPopup(this._data[cardId]);
           body.querySelector(`.film-details`).classList.remove(`visually-hidden`);
+          this._onPopupControlClick();
+          this._onCommentEmojiClick();
+          this._onRatingControlClick();
         }
       });
     });
@@ -99,24 +99,21 @@ export class MovieController {
     const emojiContainer = body.querySelector(`.film-details__add-emoji-label`);
     const emojiHeight = body.querySelector(`.film-details__comment-emoji img`).getAttribute(`height`);
     const emojiWidth = body.querySelector(`.film-details__comment-emoji img`).getAttribute(`width`);
+    emojiContainer.innerHTML = ``;
 
     body.querySelectorAll(`.film-details__emoji-label`).forEach((label) => {
       label.addEventListener(`click`, () => {
         switch (label.getAttribute(`for`)) {
           case `emoji-sleeping`:
-            emojiContainer.innerHTML = ``;
             emojiContainer.innerHTML = `<img src="./images/emoji/sleeping.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
             break;
           case `emoji-smile`:
-            emojiContainer.innerHTML = ``;
             emojiContainer.innerHTML = `<img src="./images/emoji/smile.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
             break;
           case `emoji-gpuke`:
-            emojiContainer.innerHTML = ``;
             emojiContainer.innerHTML = `<img src="./images/emoji/puke.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
             break;
           case `emoji-angry`:
-            emojiContainer.innerHTML = ``;
             emojiContainer.innerHTML = `<img src="./images/emoji/angry.png" width="${emojiWidth}" height="${emojiHeight}" alt="emoji">`;
             break;
         }
