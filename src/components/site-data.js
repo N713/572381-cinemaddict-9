@@ -98,7 +98,16 @@ export const getFilmData = () => ({
     isToWatchlist: false,
     isWatched: false,
     isFavorite: false,
-  }
+  },
+  age: [12, 14, 16, 18][getRandomIntegerUnder(COMMENTS_NUMBER)],
+  director: [`Anthony Mann`, `Anthony Wann`, `Anthony Zann`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
+  writer: [`Anne Wigton`, `Heinz Herald`, `Richard Weil`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
+  actors: [`Erich von Stroheim`, `Mary Beth Hughes`, `Dan Duryea`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
+  releaseDate: getYear(),
+  runtime: getDuration(),
+  country: [`USA`, `Canada`, `France`, `Germany`, `Italy`, `Spain`, `Norway`][getRandomIntegerUnder(NUMBER_OF_TITLES)],
+  genres: [`comedy`, `musical`, `action`, `drama`, `thriller`, `horror`, `documental`]
+    .slice(getRandomIntegerUnder(0), avoidZero(getRandomIntegerUnder(NUMBER_OF_TITLES))),
 });
 
 export const films = new Array(NUMBER_OF_FILMS_TO_RENDER).fill(``).map(getFilmData);
@@ -110,22 +119,6 @@ export const filtersValues = [
   {filter: `History`, value: getRandomIntegerUnder(NUMBER_OF_TITLES)},
   {filter: `Favorites`, value: getRandomIntegerUnder(NUMBER_OF_TITLES)},
 ];
-
-export const getPopupData = () => ({
-  poster: getPoster(),
-  age: [12, 14, 16, 18][getRandomIntegerUnder(COMMENTS_NUMBER)],
-  title: getTitle(),
-  rating: getRating(),
-  director: [`Anthony Mann`, `Anthony Wann`, `Anthony Zann`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
-  writer: [`Anne Wigton`, `Heinz Herald`, `Richard Weil`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
-  actors: [`Erich von Stroheim`, `Mary Beth Hughes`, `Dan Duryea`][getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)],
-  releaseDate: getYear(),
-  runtime: getDuration(),
-  country: [`USA`, `Canada`, `France`, `Germany`, `Italy`, `Spain`, `Norway`][getRandomIntegerUnder(NUMBER_OF_TITLES)],
-  genres: [`comedy`, `musical`, `action`, `drama`, `thriller`, `horror`, `documental`]
-    .slice(getRandomIntegerUnder(0), getRandomIntegerUnder(NUMBER_OF_TITLES)),
-  description: getDescription(),
-});
 
 const getCommentsData = () => ({
   author: [

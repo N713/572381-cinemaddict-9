@@ -1,5 +1,4 @@
 import {utils} from "./site-utils";
-import {getPopupData} from "./site-data";
 
 const body = document.querySelector(`body`);
 const mainElement = document.querySelector(`.main`);
@@ -11,12 +10,25 @@ export class MovieController {
   }
 
   init() {
-    utils.renderPopup(getPopupData());
-
+    utils.renderPopup(this._data[0]);
+    this._onCardClick();
     this._onCardControlClick();
     this._onPopupControlClick();
     this._onCommentEmojiClick();
     this._onRatingControlClick();
+  }
+
+  _onCardClick() {
+    mainElement.querySelectorAll(`.film-card`).forEach((card) => {
+      card.addEventListener(`click`, (evt) => {
+        if (evt.target.tagName === `TITLE` || `IMG` || `P`) {
+          const cardId = parseInt(`${evt.target.parentNode.getAttribute(`data-id`)}`, 10);
+          utils.remove(body.querySelector(`.film-details`));
+          utils.renderPopup(this._data[cardId]);
+          body.querySelector(`.film-details`).classList.remove(`visually-hidden`);
+        }
+      });
+    });
   }
 
   _onCardControlClick() {
