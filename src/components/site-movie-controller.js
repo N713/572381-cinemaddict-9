@@ -23,6 +23,7 @@ export class MovieController {
           utils.remove(body.querySelector(`.film-details`));
           utils.renderPopup(this._data[cardId]);
           body.querySelector(`.film-details`).classList.remove(`visually-hidden`);
+          body.querySelector(`.film-details__controls`).setAttribute(`data-controls`, cardId);
           this._onPopupControlClick();
           this._onCommentEmojiClick();
           this._onRatingControlClick();
@@ -69,25 +70,26 @@ export class MovieController {
 
   _onPopupControlClick() {
     const dataCopy = this._data.slice();
+    const currentCard = body.querySelector(`.film-details__controls`)
+      .dataset.controls;
 
     body.querySelector(`.film-details__controls`).addEventListener(`click`, (evt) => {
-
       if (evt.target.tagName === `LABEL` && evt.target.classList.contains(`film-details__control-label`)) {
         const formData = new FormData(body.querySelector(`.film-details__inner`));
 
         if (formData.get(`watchlist`) !== `on` && evt.target.classList.contains(`film-details__control-label--watchlist`)) {
-          dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isToWatchlist = true;
+          dataCopy[currentCard].state.isToWatchlist = true;
         }
 
         if (formData.get(`watched`) !== `on` && evt.target.classList.contains(`film-details__control-label--watched`)) {
-          dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isWatched = true;
+          dataCopy[currentCard].state.isWatched = true;
           body.querySelector(`.form-details__middle-container`).classList.remove(`visually-hidden`);
         } else {
           body.querySelector(`.form-details__middle-container`).classList.add(`visually-hidden`);
         }
 
         if (formData.get(`favorite`) !== `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
-          dataCopy[Math.floor(Math.random() * (dataCopy.length - 0) + 0)].state.isFavorite = true;
+          dataCopy[currentCard].state.isFavorite = true;
         }
 
         this._onDataChange(dataCopy, this._data);
