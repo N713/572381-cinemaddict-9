@@ -46,20 +46,14 @@ export class MovieController {
 
           if (evt.target.classList.contains(`film-card__controls-item--add-to-watchlist`)) {
             dataCopy[currentId].state.isToWatchlist = !dataCopy[currentId].state.isToWatchlist;
-          } else if (evt.target.classList.contains(`film-card__controls-item--active`)) {
-            dataCopy[currentId].state.isToWatchlist = false;
           }
 
           if (evt.target.classList.contains(`film-card__controls-item--mark-as-watched`)) {
             dataCopy[currentId].state.isWatched = !dataCopy[currentId].state.isWatched;
-          } else if (evt.target.classList.contains(`film-card__controls-item--active`)) {
-            dataCopy[currentId].state.isWatched = false;
           }
 
           if (evt.target.classList.contains(`film-card__controls-item--favorite`)) {
             dataCopy[currentId].state.isFavorite = !dataCopy[currentId].state.isFavorite;
-          } else if (evt.target.classList.contains(`film-card__controls-item--active`)) {
-            dataCopy[currentId].state.isFavorite = false;
           }
 
           this._onDataChange(dataCopy, this._data);
@@ -77,24 +71,17 @@ export class MovieController {
       if (evt.target.tagName === `LABEL` && evt.target.classList.contains(`film-details__control-label`)) {
         const formData = new FormData(body.querySelector(`.film-details__inner`));
 
-        if (formData.get(`watchlist`) !== `on` && evt.target.classList.contains(`film-details__control-label--watchlist`)) {
-          dataCopy[currentCard].state.isToWatchlist = true;
-        } else if (formData.get(`watchlist`) === `on` && evt.target.classList.contains(`film-details__control-label--watchlist`)) {
-          dataCopy[currentCard].state.isToWatchlist = false;
+        if (evt.target.classList.contains(`film-details__control-label--watchlist`)) {
+          dataCopy[currentCard].state.isToWatchlist = formData.get(`watchlist`) !== `on`;
         }
 
-        if (formData.get(`watched`) !== `on` && evt.target.classList.contains(`film-details__control-label--watched`)) {
-          dataCopy[currentCard].state.isWatched = true;
+        if (evt.target.classList.contains(`film-details__control-label--watched`)) {
+          dataCopy[currentCard].state.isWatched = formData.get(`watched`) !== `on`;
           body.querySelector(`.form-details__middle-container`).classList.remove(`visually-hidden`);
-        } else if (formData.get(`watched`) === `on` && evt.target.classList.contains(`film-details__control-label--watched`)) {
-          body.querySelector(`.form-details__middle-container`).classList.add(`visually-hidden`);
-          dataCopy[currentCard].state.isWatched = false;
         }
 
-        if (formData.get(`favorite`) !== `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
-          dataCopy[currentCard].state.isFavorite = true;
-        } else if (formData.get(`favorite`) === `on` && evt.target.classList.contains(`film-details__control-label--favorite`)) {
-          dataCopy[currentCard].state.isFavorite = false;
+        if (evt.target.classList.contains(`film-details__control-label--favorite`)) {
+          dataCopy[currentCard].state.isFavorite = formData.get(`favorite`) !== `on`;
         }
 
         this._onDataChange(dataCopy, this._data);
