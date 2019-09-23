@@ -115,7 +115,7 @@ export class FilmPopup extends AbstractComponent {
                   <p class="film-details__user-rating-feelings">How you feel it?</p>
       
                   <div class="film-details__user-rating-score">
-                    ${Array.from(rates).map((number) => `
+                    ${rates.map((number) => `
                       <input type="radio" name="score" class="film-details__user-rating-input visually-hidden" value="${number}" id="rating-${number}">
                       <label class="film-details__user-rating-label" for="rating-${number}">${number}</label>
                     `).join(``)}
