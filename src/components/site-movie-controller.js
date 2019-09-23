@@ -1,4 +1,6 @@
 import {utils} from "./site-utils";
+import {PageController} from "./site-page-controller";
+import {ShowMoreButton} from "./site-show-more";
 
 const body = document.querySelector(`body`);
 const mainElement = document.querySelector(`.main`);
@@ -10,7 +12,6 @@ export class MovieController {
   }
 
   init() {
-    utils.renderPopup(this._data[0]);
     this._onCardControlClick();
     this._onCardClick();
   }
@@ -57,6 +58,11 @@ export class MovieController {
           }
 
           this._onDataChange(dataCopy, this._data);
+          const controller = new PageController(mainElement.querySelector(`.films-list__container`), this._data);
+          controller.init();
+          utils.render(mainElement.querySelector(`.films-list__container`), utils.getElementFromClass(new ShowMoreButton()), utils.Position.BEFOREEND);
+          const movieController = new MovieController(this._data, this._onDataChange);
+          movieController.init();
         }
       });
     });
@@ -85,6 +91,11 @@ export class MovieController {
         }
 
         this._onDataChange(dataCopy, this._data);
+        const controller = new PageController(mainElement.querySelector(`.films-list__container`), this._data);
+        controller.init();
+        utils.render(mainElement.querySelector(`.films-list__container`), utils.getElementFromClass(new ShowMoreButton()), utils.Position.BEFOREEND);
+        const movieController = new MovieController(this._data, this._onDataChange);
+        movieController.init();
       }
     });
   }
