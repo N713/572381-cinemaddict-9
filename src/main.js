@@ -16,14 +16,13 @@ import {FilmsListContainer} from "./components/site-films-container";
 import {CommentedFilms} from "./components/site-films-commented";
 import {FilmsListTitle} from "./components/site-films-list-title";
 import {PageController} from "./components/site-page-controller";
+import {MovieController} from "./components/site-movie-controller";
 
 const NUMBER_OF_FILMS_TO_RENDER = 5;
 
-utils.renderPopup(getPopupData());
-
 const elementsIntoHeader = [utils.getElementFromClass(new Search), utils.getElementFromClass(new UserProfile)];
 const elementsIntoMain = [utils.getElementFromClass(new Navigation), utils.getElementFromClass(new Sorting), utils.getElementFromClass(new FilmSection)];
-const elementsIntoFilmsSextion = [utils.getElementFromClass(new FilmsList), utils.getElementFromClass(new TopFilms), utils.getElementFromClass(new CommentedFilms)];
+const elementsIntoFilmsSection = [utils.getElementFromClass(new FilmsList), utils.getElementFromClass(new TopFilms), utils.getElementFromClass(new CommentedFilms)];
 
 const mainElement = document.querySelector(`.main`);
 const headerElement = document.querySelector(`.header`);
@@ -31,7 +30,7 @@ utils.renderElements(elementsIntoHeader, headerElement, utils.Position.BEFOREEND
 utils.renderElements(elementsIntoMain, mainElement, utils.Position.BEFOREEND);
 
 const filmsSection = mainElement.querySelector(`.films`);
-utils.renderElements(elementsIntoFilmsSextion, filmsSection, utils.Position.BEFOREEND);
+utils.renderElements(elementsIntoFilmsSection, filmsSection, utils.Position.BEFOREEND);
 
 const filmsList = filmsSection.querySelector(`.films-list`);
 utils.render(filmsList, utils.getElementFromClass(new FilmsListTitle), utils.Position.BEFOREEND);
@@ -44,6 +43,9 @@ utils.render(filmsList, utils.getElementFromClass(new FilmsListContainer), utils
 const upcomingFilmsContainer = filmsList.querySelector(`.films-list__container`);
 const controller = new PageController(upcomingFilmsContainer, films);
 controller.init();
+
+const movieController = new MovieController(films, controller._onDataChange.bind(controller));
+movieController.init();
 
 utils.render(upcomingFilmsContainer, utils.getElementFromClass(new ShowMoreButton()), utils.Position.BEFOREEND);
 

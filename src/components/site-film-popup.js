@@ -1,6 +1,8 @@
 import {AbstractComponent} from "./site-abstract-component";
 import {commentsData} from './site-data';
 
+const rates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 export class FilmPopup extends AbstractComponent {
   constructor({poster, age, title, rating, director, writer, actors, releaseDate, runtime, country, genres, description}) {
     super();
@@ -95,6 +97,33 @@ export class FilmPopup extends AbstractComponent {
               <label for="favorite" class="film-details__control-label film-details__control-label--favorite">Add to favorites</label>
             </section>
           </div>
+          
+          <div class="form-details__middle-container visually-hidden">
+            <section class="film-details__user-rating-wrap">
+              <div class="film-details__user-rating-controls">
+                <button class="film-details__watched-reset" type="button">Undo</button>
+              </div>
+      
+              <div class="film-details__user-score">
+                <div class="film-details__user-rating-poster">
+                  <img src="${this._poster}" alt="film-poster" class="film-details__user-rating-img">
+                </div>
+      
+                <section class="film-details__user-rating-inner">
+                  <h3 class="film-details__user-rating-title">${this._title}</h3>
+      
+                  <p class="film-details__user-rating-feelings">How you feel it?</p>
+      
+                  <div class="film-details__user-rating-score">
+                    ${rates.map((number) => `
+                      <input type="radio" name="score" class="film-details__user-rating-input visually-hidden" value="${number}" id="rating-${number}">
+                      <label class="film-details__user-rating-label" for="rating-${number}">${number}</label>
+                    `).join(``)}
+                  </div>
+                </section>
+              </div>
+            </section>
+          </div>
       
           <div class="form-details__bottom-container">
             <section class="film-details__comments-wrap">
@@ -115,7 +144,7 @@ export class FilmPopup extends AbstractComponent {
                     </p>
                   </div>
                 </li>
-                `)}
+                `).join(``)}
               </ul>
       
               <div class="film-details__new-comment">

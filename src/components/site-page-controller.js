@@ -24,6 +24,14 @@ export class PageController {
     mainElement.querySelector(`.sort`).addEventListener(`click`, (evt) => this._onSortingClick(evt));
   }
 
+  _onDataChange(newData, oldData) {
+    this._cards[this._cards.findIndex((index) => index === oldData)] = newData;
+    this._container.querySelectorAll(`.film-card`).forEach((card) => {
+      card.remove();
+    });
+    this._container.querySelector(`.films-list__show-more`).remove();
+  }
+
   _onSortingClick(evt) {
     evt.preventDefault();
 
