@@ -8,6 +8,7 @@ export class Navigation extends AbstractComponent {
         ${Array.from(filtersValues).map((filter) => `
         <a href="${filter.filter}" class="main-navigation__item main-navigation__item--active">${filter.filter} <span class="main-navigation__item-count">${filter.value}</span></a>
         `).join(``)}
+        <a href="#stats" class="main-navigation__item main-navigation__item--additional">Stats</a>
       </nav>`;
   }
 }

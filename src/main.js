@@ -17,6 +17,7 @@ import {CommentedFilms} from "./components/site-films-commented";
 import {FilmsListTitle} from "./components/site-films-list-title";
 import {PageController} from "./components/site-page-controller";
 import {MovieController} from "./components/site-movie-controller";
+import {Statistics} from "./components/site-statistics";
 
 const NUMBER_OF_FILMS_TO_RENDER = 5;
 
@@ -61,6 +62,9 @@ extraFilmsContainers.forEach((container) => {
     utils.renderCard(data, container);
   });
 });
+
+const stats = new Statistics();
+stats.init();
 
 const showMoreButton = filmsList.querySelector(`.films-list__show-more`);
 let cards = filmsList.querySelectorAll(`.film-card`);
