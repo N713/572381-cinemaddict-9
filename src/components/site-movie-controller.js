@@ -12,6 +12,7 @@ export class MovieController {
   }
 
   init() {
+    utils.renderPopup(this._data[0]);
     this._onCardControlClick();
     this._onCardClick();
   }
@@ -24,10 +25,12 @@ export class MovieController {
           utils.remove(body.querySelector(`.film-details`));
           utils.renderPopup(this._data[cardId]);
           body.querySelector(`.film-details`).classList.remove(`visually-hidden`);
+          body.querySelector(`.film-details`).setAttribute(`data-id`, cardId);
           body.querySelector(`.film-details__controls`).setAttribute(`data-controls`, cardId);
           this._onPopupControlClick();
           this._onCommentEmojiClick();
           this._onRatingControlClick();
+          this._onCommentDeleteClick();
         }
       });
     });

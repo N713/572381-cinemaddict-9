@@ -1,10 +1,9 @@
 import {AbstractComponent} from "./site-abstract-component";
-import {commentsData} from './site-data';
 
 const rates = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export class FilmPopup extends AbstractComponent {
-  constructor({poster, age, title, rating, director, writer, actors, releaseDate, runtime, country, genres, description}) {
+  constructor({poster, age, title, rating, director, writer, actors, releaseDate, runtime, country, genres, description, comments}) {
     super();
     this._poster = poster;
     this._age = age;
@@ -18,6 +17,7 @@ export class FilmPopup extends AbstractComponent {
     this._country = country;
     this._genres = genres;
     this._description = description;
+    this._comments = comments;
   }
 
   getTemplate() {
@@ -127,10 +127,10 @@ export class FilmPopup extends AbstractComponent {
       
           <div class="form-details__bottom-container">
             <section class="film-details__comments-wrap">
-              <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${commentsData.length}</span></h3>
+              <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${this._comments.length}</span></h3>
       
               <ul class="film-details__comments-list">
-                ${Array.from(commentsData).map((comment) => `
+                ${this._comments.map((comment) => `
                   <li class="film-details__comment">
                   <span class="film-details__comment-emoji">
                     <img src="${comment.emoji}" width="55" height="55" alt="emoji">

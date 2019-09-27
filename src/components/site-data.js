@@ -76,14 +76,28 @@ const getDescription = () => {
   `.split(`.`, avoidZero(getRandomIntegerUnder(STRINGS_TO_DESCRIPTION)));
 };
 
-const getComment = () => {
-  return [
+const getCommentsData = () => ({
+  author: [
+    `Tim Macoveev`,
+    `John Doe`,
+    `Don Joe`,
+    `Bon Boe`,
+    `Ron Chloe`][getRandomIntegerUnder(COMMENTS_NUMBER)],
+  text: [
     `Interesting setting and a good cast`,
     `Booooooooooring`,
     `Very very old. Meh`,
     `Almost two hours? Seriously?`
-  ].slice([getRandomIntegerUnder(COMMENTS_NUMBER)], getRandomIntegerUnder(COMMENTS_NUMBER));
-};
+  ][getRandomIntegerUnder(COMMENTS_NUMBER)],
+  date: Date.now() - (1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000),
+  emoji: [
+    `./images/emoji/smile.png`,
+    `./images/emoji/sleeping.png`,
+    `./images/emoji/puke.png`,
+    `./images/emoji/angry.png`,
+  ][getRandomIntegerUnder(COMMENTS_NUMBER)],
+});
+
 
 export const getFilmData = () => ({
   poster: getPoster(),
@@ -93,7 +107,7 @@ export const getFilmData = () => ({
   duration: getDuration(),
   genre: getGenre(),
   description: getDescription(),
-  comment: getComment(),
+  comments: new Array(avoidZero(getRandomIntegerUnder(NUMBER_OF_TITLES))).fill(``).map(getCommentsData),
   state: {
     isToWatchlist: false,
     isWatched: false,
@@ -119,27 +133,3 @@ export const filtersValues = [
   {filter: `History`, value: getRandomIntegerUnder(NUMBER_OF_TITLES)},
   {filter: `Favorites`, value: getRandomIntegerUnder(NUMBER_OF_TITLES)},
 ];
-
-const getCommentsData = () => ({
-  author: [
-    `Tim Macoveev`,
-    `John Doe`,
-    `Don Joe`,
-    `Bon Boe`,
-    `Ron Chloe`][getRandomIntegerUnder(COMMENTS_NUMBER)],
-  text: [
-    `Interesting setting and a good cast`,
-    `Booooooooooring`,
-    `Very very old. Meh`,
-    `Almost two hours? Seriously?`
-  ][getRandomIntegerUnder(COMMENTS_NUMBER)],
-  date: Date.now() - (1 + Math.floor(Math.random() * 7) * 24 * 60 * 60 * 1000),
-  emoji: [
-    `./images/emoji/smile.png`,
-    `./images/emoji/sleeping.png`,
-    `./images/emoji/puke.png`,
-    `./images/emoji/angry.png`,
-  ][getRandomIntegerUnder(COMMENTS_NUMBER)],
-});
-
-export const commentsData = new Array(COMMENTS_NUMBER).fill(``).map(getCommentsData);
